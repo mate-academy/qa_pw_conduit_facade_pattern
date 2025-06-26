@@ -29,7 +29,7 @@ In this task you will need to create a Facade class for the Allure reporter.
 - `linkParentSuite()` - wraps the `allure.parentSuite()` method;
 - `linkSuite()` - wraps the `allure.suite()` method;
 - `linkSubSuite()` - wraps the `allure.subSuite()` method;
-3. Update fixture `addAllureTestHierarchy` to use the `Reporter` facade class:
+3. Update fixture `addTestHierarchy` to use the `Reporter` facade class:
 - initialize class in the fixture;
 - call class methods instead of direct allure methods calling. 
 4. Re-run all the tests and make sure that pass.

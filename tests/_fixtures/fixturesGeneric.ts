@@ -8,7 +8,7 @@ export const test = base.extend<
     usersNumber;
     contextsNumber;
     infoTestLog;
-    addAllureTestHierarchy;
+    addTestHierarchy;
   },
   {
     logger;
@@ -37,7 +37,7 @@ export const test = base.extend<
     },
     { scope: 'test', auto: true },
   ],
-  addAllureTestHierarchy: [
+  addTestHierarchy: [
     async ({ logger }, use, testInfo) => {
       const fileName = testInfo.file;
 
