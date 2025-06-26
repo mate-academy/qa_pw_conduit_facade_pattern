@@ -8,7 +8,7 @@ import {
   INTERNAL_SERVER_ERROR,
 } from '../constants/responceCodes';
 
-export class BaseAPI {
+export class BaseApi {
   _endpoint;
   _headers;
 

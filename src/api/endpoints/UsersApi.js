@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
-import { BaseAPI } from '../BaseApi';
+import { BaseApi } from '../BaseApi';
 import { ROUTES } from '../../constants/apiRoutes';
 
-export class UsersApi extends BaseAPI {
+export class UsersApi extends BaseApi {
   constructor(client) {
     super(client);
     this._headers = { 'content-type': 'application/json' };
