@@ -6,15 +6,15 @@ export class Reporter {
     this.allureReporter = allure;
   }
 
-  async linkParentSuite(parentSuiteOptions) {
-    await this.allureReporter.parentSuite(parentSuiteOptions);
+  linkParentSuite(...args) {
+    return this.allureReporter.parentSuite(...args);
   }
 
-  async linkSuite(suiteOptions) {
-    await this.allureReporter.suite(suiteOptions);
+  linkSuite(...args) {
+    return this.allureReporter.suite(...args);
   }
 
-  async linkSubSuite(subSuiteOptions) {
-    await this.allureReporter.subSuite(subSuiteOptions);
+  linkSubSuite(...args) {
+    return this.allureReporter.subSuite(...args);
   }
 }

@@ -48,13 +48,13 @@ export const test = base.extend<
 
       const allureReporterFacade = new Reporter();
 
-      await allureReporterFacade.linkParentSuite(parentSuite);
-      await allureReporterFacade.linkSuite(suite);
+      allureReporterFacade.linkParentSuite(parentSuite);
+      allureReporterFacade.linkSuite(suite);
       if (subSuite) {
-        await allureReporterFacade.linkSubSuite(subSuite);
+        allureReporterFacade.linkSubSuite(subSuite);
       }
 
-      await use('addAllureTestHierarhy');
+      await use('addAllureTestHierarchy');
     },
     { scope: 'test', auto: true },
   ],
