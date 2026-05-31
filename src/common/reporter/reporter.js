@@ -6,11 +6,11 @@ export class Reporter {
     return allure.parentSuite(name)
   };
 
-  linkSuite() {
+  linkSuite(name) {
     return allure.suite(name)
   };
 
-  linkSubSuite() {
+  linkSubSuite(name) {
     return allure.subSuite(name)
   };
 }
