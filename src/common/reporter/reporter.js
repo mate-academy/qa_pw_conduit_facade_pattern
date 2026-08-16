@@ -10,8 +10,6 @@ export class Reporter {
   }
 
   async linkSubSuite(subSuite) {
-    if (subSuite) {
       await allure.subSuite(subSuite);
-    }
   }
 }
