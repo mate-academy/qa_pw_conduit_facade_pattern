@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
-import * as allure from 'allure-js-commons';
+import { Reporter } from '../../src/common/reporter/reporter';
 import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
 
 export const test = base.extend<
@@ -45,12 +45,11 @@ export const test = base.extend<
         fileName,
         logger,
       );
+      const reporter = new Reporter();
 
-      await allure.parentSuite(parentSuite);
-      await allure.suite(suite);
-      if (subSuite) {
-        await allure.subSuite(subSuite);
-      }
+      await reporter.linkParentSuite(parentSuite);
+      await reporter.linkSuite(suite);
+      await reporter.linkSubSuite(subSuite);
 
       await use('addAllureTestHierarhy');
     },
