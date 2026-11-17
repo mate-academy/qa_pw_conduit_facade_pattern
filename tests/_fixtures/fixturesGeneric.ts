@@ -1,7 +1,7 @@
 import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
 import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
-import { Reporter } from '../../src/common/reporter/Reporter';
+import { Reporter } from '../../src/common/reporter/reporter';
 
 export const test = base.extend<
   {
