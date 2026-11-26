@@ -1,17 +1,17 @@
 import { test as base } from '@playwright/test';
 import { Logger } from '../../src/common/logger/Logger';
-import * as allure from 'allure-js-commons';
+import { Reporter } from '../../src/common/reporter/reporter';
 import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
 
 export const test = base.extend<
   {
-    usersNumber;
-    contextsNumber;
-    infoTestLog;
-    addTestHierarchy;
+    usersNumber: number;
+    contextsNumber: number;
+    infoTestLog: string;
+    addTestHierarchy: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   usersNumber: [1, { option: true }],
@@ -26,8 +26,10 @@ export const test = base.extend<
   ],
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
-      const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
-      const fileName = testInfo.file.substring(indexOfTestSubfolderStart);
+      const normalizedFileName = testInfo.file.replaceAll('\\', '/');
+      const indexOfTestSubfolderStart =
+        normalizedFileName.indexOf('/tests/') + 7;
+      const fileName = normalizedFileName.substring(indexOfTestSubfolderStart);
 
       logger.info(`Test started: ${fileName}`);
 
@@ -39,6 +41,7 @@ export const test = base.extend<
   ],
   addTestHierarchy: [
     async ({ logger }, use, testInfo) => {
+      const reporter = new Reporter();
       const fileName = testInfo.file;
 
       const [parentSuite, suite, subSuite] = parseTestTreeHierarchy(
@@ -46,13 +49,14 @@ export const test = base.extend<
         logger,
       );
 
-      await allure.parentSuite(parentSuite);
-      await allure.suite(suite);
+      await reporter.linkParentSuite(parentSuite);
+      await reporter.linkSuite(suite);
+
       if (subSuite) {
-        await allure.subSuite(subSuite);
+        await reporter.linkSubSuite(subSuite);
       }
 
-      await use('addAllureTestHierarhy');
+      await use('addTestHierarchy');
     },
     { scope: 'test', auto: true },
   ],
